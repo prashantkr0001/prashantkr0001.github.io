@@ -1,0 +1,345 @@
+----HTML,   CSS VANILLA----
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prashant Kumar | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(15,23,42,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e293b;
+    }
+    nav .container {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px;
+    }
+    nav .logo { font-size: 1.3rem; font-weight: 700; color: #38bdf8; }
+    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    nav a:hover { color: #38bdf8; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 120px 0 80px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    }
+    .hero .container {
+      display: flex; align-items: center; gap: 60px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .hero-img {
+      width: 280px; height: 280px; border-radius: 50%; overflow: hidden;
+      border: 4px solid #38bdf8; box-shadow: 0 0 40px rgba(56,189,248,0.15);
+      flex-shrink: 0;
+      background: #1e293b;
+    }
+    .hero-img img {
+      width: 100%; height: 100%; object-fit: cover;       object-position: center 25%;
+      transition: transform 0.4s ease;
+    }
+    .hero-img:hover img { transform: scale(1.05); }
+    .hero-text { flex: 1; min-width: 300px; }
+    .hero-text h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; }
+    .hero-text h1 span { color: #38bdf8; }
+    .hero-text .tagline {
+      font-size: 1.15rem; color: #94a3b8; margin: 12px 0 20px;
+    }
+    .hero-text p { color: #cbd5e1; max-width: 540px; font-size: 0.95rem; }
+    .hero-links { display: flex; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+    .hero-links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+      transition: all 0.2s; border: 1px solid #334155;
+    }
+    .hero-links .btn-primary { background: #38bdf8; color: #0f172a; border-color: #38bdf8; }
+    .hero-links .btn-primary:hover { background: #7dd3fc; }
+    .hero-links .btn-outline { color: #e2e8f0; }
+    .hero-links .btn-outline:hover { border-color: #38bdf8; color: #38bdf8; }
+
+    /* Sections */
+    section { padding: 80px 0; }
+    .section-title {
+      font-size: 1.75rem; font-weight: 700; margin-bottom: 40px;
+      position: relative; display: inline-block;
+    }
+    .section-title::after {
+      content: ''; position: absolute; bottom: -8px; left: 0;
+      width: 50px; height: 3px; background: #38bdf8; border-radius: 2px;
+    }
+
+    /* Cards */
+    .card {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 12px; padding: 24px; transition: all 0.2s;
+    }
+    .card:hover { border-color: #38bdf8; transform: translateY(-2px); }
+
+    /* Education */
+    .edu-grid { display: grid; gap: 20px; }
+    .edu-item { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+    .edu-item h3 { font-size: 1.1rem; font-weight: 600; }
+    .edu-item .meta { color: #94a3b8; font-size: 0.85rem; }
+    .edu-item .cgpa { color: #38bdf8; font-weight: 600; }
+    .edu-item .date { color: #64748b; font-size: 0.8rem; white-space: nowrap; }
+
+    /* Projects */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .proj-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .proj-card .tech { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+    .proj-card .tech span {
+      background: #0f172a; color: #38bdf8; font-size: 0.7rem;
+      padding: 4px 10px; border-radius: 20px; font-weight: 500;
+    }
+    .proj-card p { color: #94a3b8; font-size: 0.88rem; }
+
+    /* Skills */
+    .skills-grid { display: grid; gap: 28px; }
+    .skill-cat h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; color: #38bdf8; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tags span {
+      background: #1e293b; border: 1px solid #334155;
+      padding: 6px 14px; border-radius: 8px; font-size: 0.82rem; color: #cbd5e1;
+    }
+    .skill-tags span:hover { border-color: #38bdf8; }
+
+    /* Lists */
+    .list-grid { display: grid; gap: 12px; }
+    .list-item {
+      background: #1e293b; border: 1px solid #334155;
+      border-radius: 8px; padding: 16px 20px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+    }
+    .list-item:hover { border-color: #38bdf8; }
+    .list-item .name { font-weight: 500; }
+    .list-item .org { color: #94a3b8; font-size: 0.85rem; }
+    .list-item .date { color: #64748b; font-size: 0.8rem; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 40px 0;
+      border-top: 1px solid #1e293b; color: #64748b; font-size: 0.85rem;
+    }
+    footer a { color: #38bdf8; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-img { width: 200px; height: 200px; }
+      nav ul { gap: 14px; }
+      nav a { font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">PK</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#workshops">Workshops</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="about">
+  <div class="container">
+    <div class="hero-img">
+      <img src="rp.jpg" alt="Prashant Kumar Photo">
+    </div>
+    <div class="hero-text">
+      <h1>Hi, I'm <span>Prashant Kumar</span></h1>
+      <div class="tagline">Computer Science & Engineering | B.Tech 4th Year</div>
+      <p>I am a fourth-year Computer Science and Engineering student at Nagaland University with a strong interest in Artificial
+Intelligence, Machine Learning, Cybersecurity, and Full Stack Development. I have experience working on practical projects
+using Python and web technologies, including machine learning-based applications and secure web systems.</p>
+      <div class="hero-links">
+        <a href="mailto:pkumar9661900@gmail.com" class="btn-primary">&#9993; Email Me</a>
+        <a href="My_Cv.pdf" target="_blank" class="btn-primary" style="background:transparent;border-color:#38bdf8;color:#38bdf8">&#128196; View CV</a>
+        <a href="https://linkedin.com/in/prashant-kumar" target="_blank" class="btn-outline">LinkedIn</a>
+        <a href="https://github.com/prashantkr0001" target="_blank" class="btn-outline">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Education -->
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid card">
+      <div class="edu-item">
+        <div>
+          <h3>Nagaland University</h3>
+          <div class="meta">B.Tech - Computer Science and Engineering</div>
+        </div>
+        <div style="text-align:right">
+          <div class="cgpa">CGPA: 8.40</div>
+          <div class="date">Kohima, Nagaland &middot; 2023–2027</div>
+        </div>
+      </div>
+      <hr style="border-color:#334155; margin:12px 0">
+      <div class="edu-item">
+        <div>
+          <h3>B.S Inter College</h3>
+          <div class="meta">Higher Secondary (Class XII) - BSEB</div>
+        </div>
+        <div style="text-align:right">
+          <div class="cgpa">71.2%</div>
+          <div class="date">Karua, Samastipur, Bihar &middot; March 2023</div>
+        </div>
+      </div>
+      <hr style="border-color:#334155; margin:12px 0">
+      <div class="edu-item">
+        <div>
+          <h3>Campus Public School</h3>
+          <div class="meta">Secondary (Class X) - CBSE</div>
+        </div>
+        <div style="text-align:right">
+          <div class="cgpa">65.2%</div>
+          <div class="date">Dr. R.P.C.A.U, Pusa, Samastipur, Bihar &middot; March 2021</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="proj-grid">
+      <div class="card proj-card">
+        <h3>Face Recognition Attendance System</h3>
+        <div class="tech"><span>Python</span><span>OpenCV</span><span>Machine Learning</span><span>Google Colab</span></div>
+        <p>AI-based system that detects and recognizes faces to automatically record attendance. Implemented facial recognition using Python and OpenCV with ML techniques.</p>
+      </div>
+      <div class="card proj-card">
+        <h3>Student Performance Prediction System</h3>
+        <div class="tech"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Jupyter Notebook</span></div>
+        <p>Built a machine learning model to predict student academic performance based on historical data. Performed data preprocessing, model training, and evaluation.</p>
+      </div>
+      <div class="card proj-card">
+        <h3>Fake News Detection System</h3>
+        <div class="tech"><span>Python</span><span>Machine Learning</span></div>
+        <p>ML model that classifies news articles as real or fake using text analysis techniques. Applied feature extraction and classification algorithms.</p>
+      </div>
+      <div class="card proj-card">
+        <h3>Full Stack User Authentication System</h3>
+        <div class="tech"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span><span>MySQL</span></div>
+        <p>Secure web application for user registration and login with authentication. Implemented backend database integration and session management using PHP and MySQL.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid card">
+      <div class="skill-cat">
+        <h3>Programming Languages</h3>
+        <div class="skill-tags">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span><span>Python</span><span>C</span><span>C++</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>Databases</h3>
+        <div class="skill-tags"><span>MySQL</span><span>SQL</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Cybersecurity</h3>
+        <div class="skill-tags"><span>Kali Linux</span><span>Kioptrix</span><span>VirtualBox</span><span>Vulnerability Analysis</span><span>Penetration Testing</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Tools & Platforms</h3>
+        <div class="skill-tags">
+          <span>GitHub</span><span>VS Code</span><span>Google Colab</span><span>Spyder</span><span>Jupyter Notebook</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certifications">
+    <h2 class="section-title">Certifications</h2>
+    <div class="list-grid">
+      <div class="list-item">
+        <span class="name">Fundamentals &amp; Applications of Machine Learning on Multiscale Data</span>
+      </div>
+      <div class="list-item">
+        <span class="name">Cyber Security Essentials Skills - Future Skills PRIME Project (NIELIT Kohima)</span>
+      </div>
+      <div class="list-item">
+        <span class="name">8 Week Online Training on Machine Learning with AI</span>
+      </div>
+      <div class="list-item">
+        <span class="name">Web Development Fundamentals - IBM</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workshops & Training -->
+  <section id="workshops">
+    <h2 class="section-title">Workshops &amp; Training</h2>
+    <div class="list-grid">
+      <div class="list-item">
+        <span class="name">Digital Talk Show</span>
+        <span class="org">NIT Nagaland</span>
+        <span class="date">2026</span>
+      </div>
+      <div class="list-item">
+        <span class="name">Cybersecurity Bootcamp</span>
+        <span class="org">NIELIT Kohima</span>
+        <span class="date">2025</span>
+      </div>
+      <div class="list-item">
+        <span class="name">Web Development Workshop</span>
+        <span class="org">Nagaland University</span>
+        <span class="date">2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Extracurricular -->
+  <section id="extracurricular">
+    <h2 class="section-title">Extracurricular</h2>
+    <div class="list-grid">
+      <div class="list-item">
+        <span class="name">Participated in coding and debugging competitions</span>
+      </div>
+      <div class="list-item">
+        <span class="name">Active member of technical activities in college</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    &copy; 2026 Prashant Kumar &bull; <a href="mailto:pkumar9661900@gmail.com">pkumar9661900@gmail.com</a> &bull; +91-9661900189
+  </div>
+</footer>
+
+</body>
+</html>
